@@ -5,11 +5,3 @@ metadata:
   namespace: expense
 data:
   DB_HOST: mysql
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: blue-green-status
-  namespace: expense
-data:
-  live-version: nothing
