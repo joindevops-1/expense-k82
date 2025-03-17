@@ -1,6 +1,4 @@
 deployment:
-  version: 1.0.0
-  blueVersion: 1.0.0
-  greenVersion: v1
+  blueVersion: v1
+  greenVersion: 1.0.0
 currentVersion: blue
-previewVersion: green
