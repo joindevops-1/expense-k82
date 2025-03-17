@@ -28,6 +28,7 @@ spec:
       containers:
       - name: nginx
         image: joindevops/backend:{{ .Values.deployment.version }}
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: backend
