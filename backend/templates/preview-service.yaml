@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: backend
+  name: backend-preview
   namespace: expense
 spec:
   selector: # labels are used as selectors
