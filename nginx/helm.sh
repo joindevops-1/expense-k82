@@ -20,7 +20,7 @@ fi
 
 helm upgrade --install nginx . --set service.previewVersion=$PREVIEW_VERSION
 helm status nginx
-if [ $FIRST_TIME -ne 1 ]
+if [ $FIRST_TIME -ne 1 ]; then
     kubectl run test-healthcheck --rm -i --restart=Never --image=k8s.gcr.io/busybox -- /bin/sh -c "wget -qO- http://nginx-preview"
     if [ $? -ne 0 ]; then
         helm rollback nginx
