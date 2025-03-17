@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-green
+  namespace: expense
+  # labels of deployment resource
+  labels:
+    app: nginx
+    tier: nginx
+    project: expense
+    version: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+      tier: nginx
+      project: expense
+      version: green
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: nginx
+        project: expense
+        version: green
+    spec:
+      containers:
+      - name: nginx
+        image: joindevops/nginx:{{ .Values.deployment.greenVersion }}
+        envFrom:
+        - configMapRef:
+            name: nginx

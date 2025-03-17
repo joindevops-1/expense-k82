@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-preview
+  namespace: expense
+spec:
+  selector: # labels are used as selectors
+    app: nginx
+    tier: nginx
+    project: nginx
+    version: {{ .Values.service.previewVersion }}
+  ports:
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80
