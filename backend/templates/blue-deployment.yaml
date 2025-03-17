@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: joindevops/backend:{{ .Values.deployment.version }}
+        image: joindevops/backend:{{ .Values.deployment.blueVersion }}
         envFrom:
         - configMapRef:
             name: backend
