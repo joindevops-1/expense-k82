@@ -17,4 +17,4 @@ else
 fi
 
 helm upgrade --install backend . --set service.previewVersion=$PREVIEW_VERSION
-kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$NEW_VERSION'"}}'
+kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$PREVIEW_VERSION'"}}'
