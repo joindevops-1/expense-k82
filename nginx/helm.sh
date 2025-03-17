@@ -1,5 +1,5 @@
 #!/bin/bash
-NEW_VERSION=""
+PREVIEW_VERSION=""
 CURRENT_VERSION=""
 if ! kubectl get configmap blue-green-status -n expense > /dev/null 2>&1; then
     echo "First deployment detected! Creating ConfigMap and deploying Blue..."
@@ -18,3 +18,4 @@ fi
 
 helm upgrade --install backend . --set service.previewVersion=$PREVIEW_VERSION
 kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$PREVIEW_VERSION'"}}'
+echo "Current running version: $PREVIEW_VERSION"
