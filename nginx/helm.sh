@@ -2,22 +2,25 @@
 PREVIEW_VERSION=""
 CURRENT_VERSION=""
 FIRST_TIME=0
+APP_VERSION=$1
 if ! kubectl get configmap blue-green-status -n expense > /dev/null 2>&1; then
     echo "First deployment detected! Creating ConfigMap and deploying Blue..."
-    kubectl create configmap blue-green-status --from-literal=live-version="blue"
+    kubectl create configmap blue-green-status  -n expense --from-literal=live-version="blue"
     PREVIEW_VERSION="blue"
     FIRST_TIME=1
+    sed -i -e "s/BLUE_VERSION/$APP_VERSION/g" values.yaml
 else
-    CURRENT_VERSION=$(kubectl get configmap blue-green-status -o=jsonpath='{.data.live-version}')
+    CURRENT_VERSION=$(kubectl get configmap blue-green-status -n expense -o=jsonpath='{.data.live-version}')
     echo "Current Version: $CURRENT_VERSION"
     if [ "$CURRENT_VERSION" == "blue" ]; then
         PREVIEW_VERSION="green"
+        sed -i -e "s/GREEN_VERSION/$APP_VERSION/g" values.yaml
     else
         #NEW_VERSION="blue"
         PREVIEW_VERSION="blue"
+        sed -i -e "s/BLUE_VERSION/$APP_VERSION/g" values.yaml
     fi
 fi
-
 helm upgrade --install nginx . --set service.previewVersion=$PREVIEW_VERSION
 helm status nginx
 if [ $FIRST_TIME -ne 1 ]; then
