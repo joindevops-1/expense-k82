@@ -7,6 +7,7 @@ if ! kubectl get configmap blue-green-status -n expense > /dev/null 2>&1; then
     NEW_VERSION="blue"
 else
     CURRENT_VERSION=$(kubectl get configmap blue-green-status -o=jsonpath='{.data.live-version}')
+    echo "Current Version: $CURRENT_VERSION"
     if [ "$CURRENT_VERSION" == "blue" ]; then
         NEW_VERSION="green"
     else
