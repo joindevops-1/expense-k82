@@ -1,0 +1,4 @@
+deployment:
+  version: 1.0.0
+currentVersion: blue
+previewVersion: green

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: expense
+  # labels of deployment resource
+  labels:
+    app: backend
+    tier: backend
+    project: expense
+    version: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      tier: backend
+      project: expense
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        project: expense
+        version: blue
+    spec:
+      containers:
+      - name: nginx
+        image: joindevops/backend:{{ .Values.deployment.blueVersion }}
+        envFrom:
+        - configMapRef:
+            name: backend
