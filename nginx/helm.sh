@@ -16,6 +16,6 @@ else
     fi
 fi
 
-helm upgrade --install backend . --set service.previewVersion=$PREVIEW_VERSION
+helm upgrade --install nginx . --set service.previewVersion=$PREVIEW_VERSION
 kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$PREVIEW_VERSION'"}}'
 echo "Current running version: $PREVIEW_VERSION"
