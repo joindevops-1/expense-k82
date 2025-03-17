@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-blue
+  name: nginx-blue
   namespace: expense
   # labels of deployment resource
   labels:
-    app: backend
-    tier: backend
+    app: nginx
+    tier: nginx
     project: expense
     version: blue
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
-      tier: backend
+      app: nginx
+      tier: nginx
       project: expense
       version: blue
   template:
     metadata:
       labels:
-        app: backend
-        tier: backend
+        app: nginx
+        tier: nginx
         project: expense
         version: blue
     spec:
@@ -31,4 +31,4 @@ spec:
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
-            name: backend
+            name: nginx

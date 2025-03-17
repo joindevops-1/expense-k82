@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: backend
+  name: nginx
   namespace: expense
 spec:
   selector: # labels are used as selectors
-    app: backend
-    tier: backend
+    app: nginx
+    tier: nginx
     project: expense
     version: {{ .Values.service.currentVersion }}
   ports:
