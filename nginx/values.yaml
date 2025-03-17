@@ -1,5 +1,6 @@
 deployment:
   blueVersion: 1.0.0
+  greenVersion: 1.0.1
 service:
   currentVersion: blue
   previewVersion: blue
