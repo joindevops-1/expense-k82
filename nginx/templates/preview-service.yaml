@@ -7,7 +7,7 @@ spec:
   selector: # labels are used as selectors
     app: nginx
     tier: nginx
-    project: nginx
+    project: expense
     version: {{ .Values.service.previewVersion }}
   ports:
   - protocol: TCP

@@ -17,5 +17,11 @@ else
 fi
 
 helm upgrade --install nginx . --set service.previewVersion=$PREVIEW_VERSION
-kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$PREVIEW_VERSION'"}}'
-echo "Current running version: $PREVIEW_VERSION"
+kubectl run test-healthcheck --rm -i --restart=Never --image=k8s.gcr.io/busybox -- /bin/sh -c "wget -qO- http://nginx-preview"
+if [ $? -ne 0 ]; then
+ helm rollback nginx
+else
+    kubectl patch service nginx -p '{"spec":{"selector":{"version":"'$PREVIEW_VERSION'"}}}'
+    kubectl patch configmap blue-green-status -n expense --type merge -p '{"data":{"live-version":"'$PREVIEW_VERSION'"}}'
+    echo "Current running version: $PREVIEW_VERSION"
+fi
