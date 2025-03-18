@@ -4,4 +4,4 @@ metadata:
   name: backend
   namespace: expense
 data:
-  DB_HOST: expense-dev.czn6yzxlcsiv.us-east-1.rds.amazonaws.com
+  DB_HOST: mysql
