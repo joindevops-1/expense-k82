@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-blue
+  name: backend-green
   namespace: expense
   # labels of deployment resource
   labels:
     app: backend
     tier: backend
     project: expense
-    version: blue
+    version: green
 spec:
   replicas: 1
   selector:
@@ -16,14 +16,14 @@ spec:
       app: backend
       tier: backend
       project: expense
-      version: blue
+      version: green
   template:
     metadata:
       labels:
         app: backend
         tier: backend
         project: expense
-        version: blue
+        version: green
     spec:
       containers:
       - name: nginx
