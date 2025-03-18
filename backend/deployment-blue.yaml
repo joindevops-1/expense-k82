@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: joindevops/backend:v1
+        image: joindevops/backend:v3
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
