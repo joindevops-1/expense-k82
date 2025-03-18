@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: debug
+  namespace: expense
+spec:
+  # one pod can contain multiple containers
+  containers:
+  - name: debug
+    image: joindevops/debug:v1
