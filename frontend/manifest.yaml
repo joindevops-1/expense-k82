@@ -128,39 +128,39 @@ spec:
     port: 80 # service port
     targetPort: 8080
 ---
-# apiVersion: elbv2.k8s.aws/v1beta1
-# kind: TargetGroupBinding
-# metadata:
-#   name: frontend
-#   namespace: expense
-# spec:
-#   serviceRef:
-#     name: frontend # route traffic to the awesome-service
-#     port: 80
-#   targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:315069654700:targetgroup/expense-dev/e79ccac3e81e11f1
-#   targetType: ip
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
 metadata:
   name: frontend
   namespace: expense
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:315069654700:certificate/0d3eda46-6ace-4031-84c7-509d3bde9ad2
-    alb.ingress.kubernetes.io/group.name: joindevops
 spec:
-  ingressClassName: alb
-  rules:
-  - host: "expense-dev.daws82s.online"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: frontend
-            port:
-              number: 80
+  serviceRef:
+    name: frontend # route traffic to the awesome-service
+    port: 80
+  targetGroupARN: arn:aws:elasticloadbalancing:us-east-1:315069654700:targetgroup/expense-dev/e79ccac3e81e11f1
+  targetType: ip
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: frontend
+#   namespace: expense
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+#     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:315069654700:certificate/0d3eda46-6ace-4031-84c7-509d3bde9ad2
+#     alb.ingress.kubernetes.io/group.name: joindevops
+# spec:
+#   ingressClassName: alb
+#   rules:
+#   - host: "expense-dev.daws82s.online"
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: frontend
+#             port:
+#               number: 80
